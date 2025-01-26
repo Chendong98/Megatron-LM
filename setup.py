@@ -113,7 +113,8 @@ setuptools.setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
     ],
-    packages=setuptools.find_namespace_packages(include=["megatron.core", "megatron.core.*"]),
+    # make training and other megatron module available when use `pip install -e .`
+    packages=setuptools.find_namespace_packages(include=["megatron.core", "megatron.core.*", "megatron.training", "megatron.legacy", "megatron.inference"]),
     ext_modules=[
         Extension(
             "megatron.core.datasets.helpers",

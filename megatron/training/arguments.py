@@ -49,7 +49,19 @@ def parse_args(extra_args_provider=None, ignore_unknown_args=False):
 
     # Parse.
     if ignore_unknown_args:
-        args, _ = parser.parse_known_args()
+        # mindspeed need some args & global var so far, we need a more in-depth analysis to remove this part of the code.
+        arg_list = [
+            "--tensor-model-parallel-size", "2",
+            "--pipeline-model-parallel-size", "1",
+            "--num-layers", "16",
+            "--hidden-size", "2048",
+            "--num-attention-heads", "32",
+            "--seq-length", "512",
+            "--max-position-embeddings", "131072",
+            "--micro-batch-size", "8",
+        ]
+        args, _ = parser.parse_known_args(arg_list)
+        # args, _ = parser.parse_known_args()
     else:
         args = parser.parse_args()
 
